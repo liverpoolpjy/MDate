@@ -1,8 +1,9 @@
+创建对象
 ```
 now = datetime.now()
 mdate = MDate()
 ```
-获取上个月的今天:
+获取上个月的今天
 ```
 print mdate.last_month_date(now)
 >>>2016-08-27 19:56:32.672000
