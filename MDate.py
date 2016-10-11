@@ -49,6 +49,20 @@ class MDate(object):
         last_month = last_month.replace(year=_year, month=_month)
         return last_month
 
+    @staticmethod
+    def last_year_date(d):
+        """
+        获取一年前的今天
+        :param d:
+        :return:
+        """
+        _year = d.year - 1
+        if d.year % 4 == 0 and d.month == 2 and d.day == 29:
+            _day = d.day - 1
+        else:
+            _day = d.day
+        return d.replace(year=_year, day=_day)
+
     def month_list_for_recent_year(self, cursor):
         """
         近一年的月份列表
@@ -74,6 +88,17 @@ class MDate(object):
             _list.append([start_time, end_time])
             cursor = self.last_second_in_last_month(cursor)
         return _list[::-1]
+
+    def start_and_end_time_for_recent_year(self, cursor):
+        """
+        近一年起止时间点列表
+        :param cursor:
+        :return:
+        """
+
+        start_time = self.last_year_date(cursor)
+        end_time = cursor
+        return [start_time + timedelta(seconds=1), end_time]
 
     def start_and_end_time_list_for_recent_month(self, cursor):
         """
