@@ -88,6 +88,21 @@ class MDate(object):
             _list.append([start_time, end_time])
             cursor = self.last_second_in_last_month(cursor)
         return _list[::-1]
+    
+    @staticmethod
+    def start_and_end_hour_list_for_recent_day(cursor):
+        """
+        近一天小时起止时间列表
+        :param cursor:
+        :return:
+        """
+        _list = []
+        for i in range(24):
+            end_time = cursor
+            start_time = end_time - timedelta(hours=1)
+            _list.append([start_time, end_time])
+            cursor = start_time
+        return _list[::-1]
 
     def start_and_end_time_for_recent_year(self, cursor):
         """
